@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Github API Demo</title>
+</head>
+<body data-ng-app="githubApp">
+  <main data-ng-controller="GithubController as ghc">
+    <h1>What have you been working on lately?</h1>
+    <div>{{ghc.stuff}}</div>
+    <form>
+      <input data-ng-model="ghc.username" placeholder="enter a github username"></input>
+      <button data-ng-click="ghc.fetchEvents(ghc.username)">click for your last github event</button>
+    </form>
+    <img data-ng-if="ghc.stuff.imgUrl" src="{{ghc.stuff.imgUrl}}" alt="user gravatar image">
+  </main>
+  <script src="bundle.js"></script>
+</body>
+</html>
