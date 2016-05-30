@@ -17,4 +17,15 @@ gulp.task('static:dev', () => {
     .pipe(gulp.dest('build'));
 });
 
+gulp.task('webpack:test', () => {
+  gulp.src('test/unit/test_entry.js')
+  .pipe(webpack({
+    devtool: 'source-map',
+    output: {
+      filename: 'test_bundle.js'
+    }
+  }))
+  .pipe(gulp.dest('test/unit'));
+});
+
 gulp.task('default', ['webpack:dev', 'static:dev']);

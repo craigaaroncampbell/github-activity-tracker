@@ -20,7 +20,7 @@
           {{ghc.stuff.username}}&#39;s last Github event was on {{ghc.stuff.date | date: 'fullDate'}} at {{ghc.stuff.date | date: 'mediumTime'}}.
         </h2>
         <p> This badass code ninja was working on the <em> {{ghc.stuff.repo}} </em> repo</p>
-        <p> This was a <em>{{ghc.stuff.type}}</em></p>
+        <p> This was a <em>{{ghc.stuff.type | splitOnCaps}}</em></p>
         <p data-ng-if="ghc.stuff.commitMessage">The commit message was: <em>{{ghc.stuff.commitMessage}}</em></p>
       </section>
     </article>

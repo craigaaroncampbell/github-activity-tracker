@@ -2,6 +2,18 @@ const angular = require('angular');
 
 var githubApp = angular.module('githubApp', []);
 
+githubApp.filter('splitOnCaps', function() {
+  return function(str) {
+    var caps = /[A-Z]/;
+    var newStr = str.charAt(0);
+    for (var i = 1; i < str.length; i++) {
+      if (str.charAt(i).match(caps)) newStr += ' ';
+      newStr += str.charAt(i);
+    }
+    return newStr;
+  };
+});
+
 githubApp.controller('GithubController', ['$http', function($http) {
   var blah = this;
   this.fetchEvents = function(username) {
