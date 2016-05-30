@@ -2,17 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Github API Demo</title>
+  <title>Your Recent Github Events</title>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body data-ng-app="githubApp">
   <main data-ng-controller="GithubController as ghc">
     <h1>What have you been working on lately?</h1>
-    <div>{{ghc.stuff}}</div>
     <form>
       <input data-ng-model="ghc.username" placeholder="enter a github username"></input>
       <button data-ng-click="ghc.fetchEvents(ghc.username)">click for your last github event</button>
     </form>
-    <img data-ng-if="ghc.stuff.imgUrl" src="{{ghc.stuff.imgUrl}}" alt="user gravatar image">
+    <article data-ng-if="ghc.stuff">
+      <img src="{{ghc.stuff.imgUrl}}" alt="user gravatar image">
+      <section>
+        <h2 data-ng-if="ghc.stuff">
+          {{ghc.stuff.username}}&#39;s last Github event was on {{ghc.stuff.date}} at {{ghc.stuff.time}}.
+        </h2>
+        <p> This badass code ninja was working on the <em> {{ghc.stuff.repo}} </em> repo</p>
+        <p> This was a <em>{{ghc.stuff.type}}</em></p>
+      </section>
+    </article>
   </main>
   <script src="bundle.js"></script>
 </body>

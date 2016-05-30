@@ -3,7 +3,6 @@ const angular = require('angular');
 var githubApp = angular.module('githubApp', []);
 
 githubApp.controller('GithubController', ['$http', function($http) {
-  this.stuff = "the data from github will go here"
   var blah = this;
   this.fetchEvents = function(username) {
     $http.get('https://api.github.com/users/' + username + '/events')
@@ -19,12 +18,16 @@ githubApp.controller('GithubController', ['$http', function($http) {
             commitMsg = 'The last event was not a commit - so no message';
           }
 
+          var date = new Date(data.created_at);
+
+
           blah.stuff = {
             username: data.actor.display_login,
             repo: data.repo.name,
             imgUrl: data.actor.avatar_url,
             commitMessage: commitMsg,
-            date: data.created_at,
+            date: date.toDateString(),
+            time: date.toLocaleString().split(',')[1],
             type: eventType
           }
         },
