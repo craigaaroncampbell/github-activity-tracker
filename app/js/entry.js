@@ -12,11 +12,7 @@ githubApp.controller('GithubController', ['$http', function($http) {
           console.log(data)
           var eventType = data.type;
           var commitMsg;
-          if (eventType === 'PushEvent' ) {
-            commitMsg = data.payload.commits[0].message;
-          } else {
-            commitMsg = 'The last event was not a commit - so no message';
-          }
+          if (eventType === 'PushEvent' ) commitMsg = data.payload.commits[0].message;
 
           var date = new Date(data.created_at);
 
@@ -25,15 +21,14 @@ githubApp.controller('GithubController', ['$http', function($http) {
             repo: data.repo.name,
             imgUrl: data.actor.avatar_url,
             commitMessage: commitMsg,
-            date: date.toDateString(),
-            time: date.toLocaleString().split(',')[1],
+            date: date,
             type: eventType
           };
           blah.error = null;
         },
         function(err) {
           console.log(err);
-          blah.error = 'Apparently Github has no such user:' + username;
+          blah.error = 'Apparently Github has no such user: ' + username;
           blah.stuff = null;
         }
     );
