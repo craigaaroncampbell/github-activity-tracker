@@ -20,7 +20,6 @@ githubApp.controller('GithubController', ['$http', function($http) {
 
           var date = new Date(data.created_at);
 
-
           blah.stuff = {
             username: data.actor.display_login,
             repo: data.repo.name,
@@ -29,11 +28,13 @@ githubApp.controller('GithubController', ['$http', function($http) {
             date: date.toDateString(),
             time: date.toLocaleString().split(',')[1],
             type: eventType
-          }
+          };
+          blah.error = null;
         },
         function(err) {
           console.log(err);
-          blah.stuff = 'Apparently Github has no such user:' + username;
+          blah.error = 'Apparently Github has no such user:' + username;
+          blah.stuff = null;
         }
     );
   }
